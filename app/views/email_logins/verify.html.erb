@@ -1,0 +1,8 @@
+<h1>Enter your code</h1>
+<p>We sent a 6-digit code to <strong><%= @email %></strong>.</p>
+<%= form_with url: confirm_email_login_path, method: :post, local: true do |f| %>
+  <%= hidden_field_tag :email, @email %>
+  <%= label_tag :code, "6-digit code" %>
+  <%= text_field_tag :code, nil, inputmode: "numeric", pattern: "\\d*", maxlength: 6, required: true, autofocus: true %>
+  <%= submit_tag "Sign in" %>
+<% end %>
