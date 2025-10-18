@@ -1,0 +1,7 @@
+<h1>Enter your email address</h1>
+
+<%= form_with url: email_login_path, method: :post, local: true do %>
+  <%= label_tag :email, "Email address" %><br>
+  <%= email_field_tag :email, params[:email], required: true, autofocus: true %><br>
+  <%= submit_tag "Send login code" %>
+<% end %>

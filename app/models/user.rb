@@ -1,7 +1,9 @@
 # app/models/user.rb
+require "bcrypt"
+
 class User < ApplicationRecord
-  devise :registerable, :confirmable, :trackable, :validatable, :lockable,
-         :timeoutable, :rememberable, :database_authenticatable # keep if you also allow password logins
+  # Only include Devise modules supported by the current schema
+  devise :registerable, :validatable, :rememberable, :database_authenticatable
 
   OTP_TTL       = 10.minutes
   OTP_LENGTH    = 6
@@ -41,4 +43,3 @@ class User < ApplicationRecord
     end
   end
 end
-

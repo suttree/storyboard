@@ -8,13 +8,9 @@ class EmailLoginsController < ApplicationController
   def create
     # Paranoid flow: don’t disclose if email exists
     if (user = User.find_by(email: params[:email].to_s.downcase))
-      if user.locked_at.present?
-        flash.now[:alert] = "We’ve emailed instructions if your account is available."
-        return render :new, status: :unprocessable_entity
-      end
-
+      # Generate and email a one-time code if the account exists
       code = user.generate_email_otp!
-      OtpMailer.with(user:, code:).email_login_code.deliver_later
+      OtpMailer.with(user: user, code: code).email_login_code.deliver_later
     end
 
     # Always say the same thing
@@ -42,4 +38,3 @@ class EmailLoginsController < ApplicationController
     redirect_to after_sign_in_path_for(user), notice: "Signed in."
   end
 end
-
