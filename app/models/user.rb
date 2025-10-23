@@ -5,6 +5,9 @@ class User < ApplicationRecord
   # Only include Devise modules supported by the current schema
   devise :registerable, :validatable, :rememberable, :database_authenticatable
 
+  # Record users' questionnaire answers
+  has_many :answers, dependent: :destroy
+
   OTP_TTL       = 10.minutes
   OTP_LENGTH    = 6
   MAX_OTP_TRIES = 5

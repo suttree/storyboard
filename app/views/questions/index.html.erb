@@ -1,0 +1,15 @@
+<h1>Questions</h1>
+<%= form_with url: answers_path, local: true do %>
+  <% @questions.each do |question| %>
+    <div class="question">
+      <p><strong><%= question.text %></strong></p>
+      <% question.question_responses.each do |response| %>
+        <div>
+          <%= radio_button_tag "answers[#{question.id}]", response.id, false, id: "question_#{question.id}_response_#{response.id}" %>
+          <%= label_tag "question_#{question.id}_response_#{response.id}", response.text %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <%= submit_tag "Submit Answers" %>
+<% end %>

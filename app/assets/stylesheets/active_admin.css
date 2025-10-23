@@ -1,0 +1,6 @@
+/*
+ * ActiveAdmin CSS
+ *
+ * This will import the ActiveAdmin base styles from the gem's vendor assets.
+ */
+@import "active_admin/base";

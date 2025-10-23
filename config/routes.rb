@@ -17,4 +17,19 @@ Rails.application.routes.draw do
   end
 
   root "home#index"
+
+  resources :questions, only: [:index]
+  resources :answers, only: [:create]
+
+  namespace :question_admin do
+    resources :questions, only: [:index, :new, :create, :edit, :update] do
+      resources :question_responses, path: "responses", only: [:index, :new, :create, :edit, :update]
+    end
+    resources :answers, only: [:index]
+  end
+
+  # ActiveAdmin routes
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
 end
